@@ -1,5 +1,6 @@
 package com.diffblue.interview.analyzer;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +23,12 @@ public class CodeTestImpl implements CodeTest {
     public Set<CodeLine> getCoveredLines() {
 
         List<CodeLine> lines = codeClass.getLinesOfCode();
+        Set<CodeLine> coveredLines = new HashSet<>();
 
-        return null;
+        for(CodeLine codeLine: lines) {
+            coveredLines.add(codeLine);
+        }
+
+        return coveredLines;
     }
 }
