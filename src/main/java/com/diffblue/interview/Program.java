@@ -5,7 +5,9 @@ import com.diffblue.interview.scanner.TestScannerStub;
 
 public class Program {
     public static void main(String[] args) {
-        CodeAnalyzerRunner runner = new CodeAnalyzerRunner(new CoveringProcessorStub(), new TestScannerStub());
+        CodeAnalyzerRunner runner = new CodeAnalyzerRunner(
+                new CoveringProcessorStub(),
+                new TestScannerStub());
 
         //runner.analyzeOneTest();
         //runner.analyzeTestSet();
