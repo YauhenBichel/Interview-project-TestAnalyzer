@@ -9,18 +9,31 @@ import com.diffblue.interview.analyzer.CodeTest;
 import com.diffblue.interview.analyzer.CodeTestImpl;
 
 import java.io.File;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Program {
     public static void main(String[] args) {
         String currentDir = new File("").getAbsoluteFile().getAbsolutePath();
-        final String javaFile = currentDir + "/example/app/SimpleCalculator.java";
-        CodeClass codeClass = new CodeClassImpl(javaFile);
+        final String javaSrcFile1 = currentDir + "/example/app/IntegerCalculator.java";
+        final String javaSrcFile2 = currentDir + "/example/app/FloatCalculator.java";
+        final String javaTestFile1 = currentDir + "/example/test/IntegerCalculatorTest.java";
+        final String javaTestFile2 = currentDir + "/example/test/FloatCalculatorTest.java";
 
-        List<CodeLine> lines = codeClass.getLinesOfCode();
+        CodeTest codeTest1 = prepareCodeTest(javaSrcFile1, javaTestFile1);
+        CodeTest codeTest2 = prepareCodeTest(javaSrcFile2, javaTestFile2);
 
-        CodeTest codeTest = new CodeTestImpl();
+        Set<CodeTest> codeTestSet = new HashSet<>();
+        codeTestSet.add(codeTest1);
+        codeTestSet.add(codeTest2);
+
         CodeAnalyzer codeAnalyzer = new CodeAnalyzerImpl();
-        codeAnalyzer.runTest(codeTest);
+        Set<CodeLine> test1CodeLines = codeAnalyzer.runTest(codeTest1);
+        Set<CodeLine> suiteCodeLines = codeAnalyzer.runTestSuite(codeTestSet);
+    }
+
+    private static CodeTest prepareCodeTest(String srcFile, String testFile) {
+        CodeClass srcCodeClass = new CodeClassImpl(srcFile);
+        return new CodeTestImpl(testFile, srcCodeClass);
     }
 }

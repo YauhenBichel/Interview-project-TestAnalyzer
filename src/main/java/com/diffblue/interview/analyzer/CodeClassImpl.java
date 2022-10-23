@@ -27,8 +27,8 @@ public class CodeClassImpl implements CodeClass {
         try {
             lines = Files.lines(filePath, Charset.defaultCharset())
                     .collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
 
         for (int i = 0; i < lines.size(); i++) {

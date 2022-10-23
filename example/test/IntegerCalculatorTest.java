@@ -4,12 +4,12 @@ import com.diffblue.interview.app.SimpleCalculator;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SimpleCalculatorTest {
+public class IntegerCalculatorTest {
 
     @Test
     public void testSum() {
         //arrange
-        SimpleCalculator calc = new SimpleCalculator();
+        IntegerCalculator calc = new IntegerCalculator();
         final int expectedResult = 5;
 
         //act
@@ -22,7 +22,7 @@ public class SimpleCalculatorTest {
     @Test
     public void testSubtract() {
         //arrange
-        SimpleCalculator calc = new SimpleCalculator();
+        IntegerCalculator calc = new IntegerCalculator();
         final int expectedResult = 3;
 
         //act
