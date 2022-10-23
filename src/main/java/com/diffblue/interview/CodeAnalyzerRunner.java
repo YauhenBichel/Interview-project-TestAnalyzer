@@ -18,17 +18,25 @@ import java.util.Set;
 
 public class CodeAnalyzerRunner {
 
-    public void run() {
+    private CoverageProcessor coverageProcessor;
+    private final String javaSrcPath1;
+    private final String javaTestPath1;
+    private final String javaSrcPath2;
+    private final String javaTestPath2;
+
+    public CodeAnalyzerRunner() {
+        coverageProcessor = new CoverageProcessorStub();
+
         String currentDir = new File("").getAbsoluteFile().getAbsolutePath();
-        final String javaSrcPath1 = currentDir + Constants.javaSrcFile1;
-        final String javaTestPath1 = currentDir + Constants.javaTestFile1;
-        final String javaSrcPath2 = currentDir + Constants.javaSrcFile2;
-        final String javaTestPath2 = currentDir + Constants.javaTestFile2;
+        javaSrcPath1 = currentDir + Constants.javaSrcFile1;
+        javaTestPath1 = currentDir + Constants.javaTestFile1;
+        javaSrcPath2 = currentDir + Constants.javaSrcFile2;
+        javaTestPath2 = currentDir + Constants.javaTestFile2;
+    }
 
-        CoverageProcessor coverageProcessor = new CoverageProcessorStub();
-
-        CodeTest codeTest1 = prepareCodeTest(javaSrcPath1, javaTestPath1, coverageProcessor);
-        CodeTest codeTest2 = prepareCodeTest(javaSrcPath2, javaTestPath2, coverageProcessor);
+    public void run() {
+        CodeTest codeTest1 = prepareCodeTest(javaSrcPath1, javaTestPath1);
+        CodeTest codeTest2 = prepareCodeTest(javaSrcPath2, javaTestPath2);
 
         Set<CodeTest> codeTestSet = new HashSet<>();
         codeTestSet.add(codeTest1);
@@ -40,6 +48,43 @@ public class CodeAnalyzerRunner {
         printResults(codeTest1.getName(), test1CodeLines);
 
         Set<CodeLine> suiteCodeLines = codeAnalyzer.runTestSuite(codeTestSet);
+
+        Set<String> uniqueTests = codeAnalyzer.uniqueTests();
+    }
+
+    public void analyzeOneTest() {
+        CodeTest codeTest1 = prepareCodeTest(javaSrcPath1, javaTestPath1);
+
+        TestRunner testRunner = new TestRunnerStub();
+        CodeAnalyzer codeAnalyzer = new CodeAnalyzerImpl(testRunner);
+        Set<CodeLine> test1CodeLines = codeAnalyzer.runTest(codeTest1);
+        printResults(codeTest1.getName(), test1CodeLines);
+    }
+
+    public void analyzeTestSet() {
+        CodeTest codeTest1 = prepareCodeTest(javaSrcPath1, javaTestPath1);
+        CodeTest codeTest2 = prepareCodeTest(javaSrcPath2, javaTestPath2);
+
+        Set<CodeTest> codeTestSet = new HashSet<>();
+        codeTestSet.add(codeTest1);
+        codeTestSet.add(codeTest2);
+
+        TestRunner testRunner = new TestRunnerStub();
+        CodeAnalyzer codeAnalyzer = new CodeAnalyzerImpl(testRunner);
+
+        Set<CodeLine> suiteCodeLines = codeAnalyzer.runTestSuite(codeTestSet);
+    }
+
+    public void getUniqueTests() {
+        CodeTest codeTest1 = prepareCodeTest(javaSrcPath1, javaTestPath1);
+        CodeTest codeTest2 = prepareCodeTest(javaSrcPath2, javaTestPath2);
+
+        Set<CodeTest> codeTestSet = new HashSet<>();
+        codeTestSet.add(codeTest1);
+        codeTestSet.add(codeTest2);
+
+        TestRunner testRunner = new TestRunnerStub();
+        CodeAnalyzer codeAnalyzer = new CodeAnalyzerImpl(testRunner);
 
         Set<String> uniqueTests = codeAnalyzer.uniqueTests();
     }
@@ -56,7 +101,7 @@ public class CodeAnalyzerRunner {
         System.out.println("-------");
     }
 
-    private CodeTest prepareCodeTest(String srcFile, String testFile, CoverageProcessor coverageProcessor) {
+    private CodeTest prepareCodeTest(String srcFile, String testFile) {
         CodeClass srcCodeClass = new CodeClassImpl(srcFile);
         return new CodeTestImpl(testFile, srcCodeClass, coverageProcessor);
     }
