@@ -31,4 +31,9 @@ public class CodeAnalyzerImpl implements CodeAnalyzer {
 
         return codeTestSet;
     }
+
+    @Override
+    public Set<String> uniqueTests() {
+        return null;
+    }
 }

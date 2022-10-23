@@ -19,4 +19,9 @@ public interface CodeAnalyzer {
      * @return the covered lines of code
      */
     Set<CodeLine> runTestSuite(Set<CodeTest> tests);
+
+    /**
+     * @return all tests that cover something not covered by other tests
+     */
+    Set<String> uniqueTests();
 }

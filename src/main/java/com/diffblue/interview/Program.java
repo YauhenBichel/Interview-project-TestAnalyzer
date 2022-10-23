@@ -35,6 +35,8 @@ public class Program {
         printResults(codeTest1.getName(), test1CodeLines);
 
         Set<CodeLine> suiteCodeLines = codeAnalyzer.runTestSuite(codeTestSet);
+
+        Set<String> uniqueTests = codeAnalyzer.uniqueTests();
     }
 
     private static void printResults(String testName, Set<CodeLine> coveredLines) {
