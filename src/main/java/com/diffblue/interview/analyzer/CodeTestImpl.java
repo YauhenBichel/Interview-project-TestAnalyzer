@@ -1,20 +1,18 @@
 package com.diffblue.interview.analyzer;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class CodeTestImpl implements CodeTest {
 
     private String testFile;
     private CodeClass codeClass;
+    private CoverageProcessor coverageProcessor;
 
-    public CodeTestImpl(String testFile, CodeClass codeClass) {
+    public CodeTestImpl(String testFile, CodeClass codeClass, CoverageProcessor coverageProcessor) {
         this.testFile = testFile;
         this.codeClass = codeClass;
+        this.coverageProcessor = coverageProcessor;
     }
 
     @Override
@@ -26,10 +24,7 @@ public class CodeTestImpl implements CodeTest {
     public Set<CodeLine> getCoveredLines() {
 
         List<CodeLine> lines = codeClass.getLinesOfCode();
-
-        Set<CodeLine> coveredLines = lines.stream()
-                .sorted(Comparator.comparingInt(CodeLine::getLineNumber))
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+        Set<CodeLine> coveredLines = coverageProcessor.getCoveredLines(lines);
 
         return coveredLines;
     }
