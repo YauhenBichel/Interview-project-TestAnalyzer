@@ -6,6 +6,8 @@ import java.util.Set;
 
 public interface TestScanner {
     Set<String> getSourceFiles();
+
     Set<String> getTestFiles();
+
     Set<Pair<String, String>> getSourceTestPairs();
 }

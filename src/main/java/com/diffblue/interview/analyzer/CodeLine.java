@@ -15,5 +15,6 @@ public interface CodeLine {
         String getContents();
 
         int getCoveredByTestsAmount();
+
         void setCoveredByTestsAmount(int amount);
 }
