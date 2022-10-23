@@ -33,7 +33,18 @@ public class CodeAnalyzerImpl implements CodeAnalyzer {
     }
 
     @Override
-    public Set<String> uniqueTests() {
-        return null;
+    public Set<String> uniqueTests(Set<CodeTest> tests) {
+        Set<String> testNames = new HashSet<>();
+        final int coveredOnlyByOneTest = 1;
+
+        for (CodeTest test : tests) {
+            for (CodeLine codeLine : test.getCoveredLines()) {
+                if (codeLine.getCoveredByTestsAmount() == coveredOnlyByOneTest) {
+                    testNames.add(test.getName());
+                }
+            }
+        }
+
+        return testNames;
     }
 }

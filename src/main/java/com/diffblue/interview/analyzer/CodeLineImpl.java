@@ -4,10 +4,12 @@ public class CodeLineImpl implements CodeLine {
 
     private int lineNumber;
     private String content;
+    private int coveredByTestsAmount;
 
-    public CodeLineImpl(int lineNumber, String content) {
+    public CodeLineImpl(int lineNumber, String content, int coveredByTestsAmount) {
         this.lineNumber = lineNumber;
         this.content = content;
+        this.coveredByTestsAmount = coveredByTestsAmount;
     }
 
     @Override
@@ -18,6 +20,16 @@ public class CodeLineImpl implements CodeLine {
     @Override
     public String getContents() {
         return content;
+    }
+
+    @Override
+    public int getCoveredByTestsAmount() {
+        return coveredByTestsAmount;
+    }
+
+    @Override
+    public void setCoveredByTestsAmount(int amount) {
+        coveredByTestsAmount = amount;
     }
 
     @Override

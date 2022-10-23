@@ -36,7 +36,7 @@ public class CodeAnalyzerRunner {
         printResults(codeTest.getName(), test1CodeLines);
 
         Set<CodeLine> suiteCodeLines = codeAnalyzer.runTestSuite(codeTestSet);
-        Set<String> uniqueTests = codeAnalyzer.uniqueTests();
+        Set<String> uniqueTests = codeAnalyzer.uniqueTests(codeTestSet);
     }
 
     public void analyzeOneTest() {
@@ -64,7 +64,7 @@ public class CodeAnalyzerRunner {
         TestRunner testRunner = new TestRunnerStub();
         CodeAnalyzer codeAnalyzer = new CodeAnalyzerImpl(testRunner);
 
-        Set<String> uniqueTests = codeAnalyzer.uniqueTests();
+        Set<String> uniqueTests = codeAnalyzer.uniqueTests(codeTestSet);
     }
 
     private void printResults(String testName, Set<CodeLine> coveredLines) {

@@ -21,7 +21,8 @@ public interface CodeAnalyzer {
     Set<CodeLine> runTestSuite(Set<CodeTest> tests);
 
     /**
+     * @param tests to find unique tests
      * @return all tests that cover something not covered by other tests
      */
-    Set<String> uniqueTests();
+    Set<String> uniqueTests(Set<CodeTest> tests);
 }

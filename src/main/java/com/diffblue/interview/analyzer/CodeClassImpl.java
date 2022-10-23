@@ -27,13 +27,20 @@ public class CodeClassImpl implements CodeClass {
         try {
             lines = Files.lines(filePath, Charset.defaultCharset())
                     .collect(Collectors.toList());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
 
-        for (int i = 0; i < lines.size(); i++) {
-            CodeLine codeLine = new CodeLineImpl(i + 1, lines.get(i));
-            codeLines.add(codeLine);
+            for (int i = 0; i < lines.size(); i++) {
+
+                CodeLine codeLine = new CodeLineImpl(i + 1, lines.get(i), 1);
+
+                if(codeLines.contains(codeLine)) {
+                    codeLine.setCoveredByTestsAmount(codeLine.getCoveredByTestsAmount() + 1);
+                }
+
+                codeLines.add(codeLine);
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();//replace by logging and exception for user
         }
 
         return codeLines;

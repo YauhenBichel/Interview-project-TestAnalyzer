@@ -13,4 +13,7 @@ public interface CodeLine {
          * @return the string representation of the this line of code
          */
         String getContents();
+
+        int getCoveredByTestsAmount();
+        void setCoveredByTestsAmount(int amount);
 }
