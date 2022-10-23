@@ -11,6 +11,7 @@ import com.diffblue.interview.analyzer.CoverageProcessor;
 import com.diffblue.interview.analyzer.CoverageProcessorStub;
 import com.diffblue.interview.runner.TestRunner;
 import com.diffblue.interview.runner.TestRunnerStub;
+import com.diffblue.interview.scanner.TestScanner;
 
 import java.io.File;
 import java.util.HashSet;
@@ -18,14 +19,16 @@ import java.util.Set;
 
 public class CodeAnalyzerRunner {
 
+    private TestScanner testScanner;
     private CoverageProcessor coverageProcessor;
     private final String javaSrcPath1;
     private final String javaTestPath1;
     private final String javaSrcPath2;
     private final String javaTestPath2;
 
-    public CodeAnalyzerRunner() {
-        coverageProcessor = new CoverageProcessorStub();
+    public CodeAnalyzerRunner(CoverageProcessor coverageProcessor, TestScanner testScanner) {
+        this.coverageProcessor = coverageProcessor;
+        this.testScanner = testScanner;
 
         String currentDir = new File("").getAbsoluteFile().getAbsolutePath();
         javaSrcPath1 = currentDir + Constants.javaSrcFile1;
