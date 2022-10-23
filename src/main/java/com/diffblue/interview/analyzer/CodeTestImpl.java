@@ -7,12 +7,12 @@ public class CodeTestImpl implements CodeTest {
 
     private String testFile;
     private CodeClass codeClass;
-    private CoverageProcessor coverageProcessor;
+    private CoveringProcessor coveringProcessor;
 
-    public CodeTestImpl(String testFile, CodeClass codeClass, CoverageProcessor coverageProcessor) {
+    public CodeTestImpl(String testFile, CodeClass codeClass, CoveringProcessor coveringProcessor) {
         this.testFile = testFile;
         this.codeClass = codeClass;
-        this.coverageProcessor = coverageProcessor;
+        this.coveringProcessor = coveringProcessor;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class CodeTestImpl implements CodeTest {
     public Set<CodeLine> getCoveredLines() {
 
         List<CodeLine> lines = codeClass.getLinesOfCode();
-        Set<CodeLine> coveredLines = coverageProcessor.getCoveredLines(lines);
+        Set<CodeLine> coveredLines = coveringProcessor.getCoveredLines(lines);
 
         return coveredLines;
     }

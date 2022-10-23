@@ -7,8 +7,7 @@ import com.diffblue.interview.analyzer.CodeClassImpl;
 import com.diffblue.interview.analyzer.CodeLine;
 import com.diffblue.interview.analyzer.CodeTest;
 import com.diffblue.interview.analyzer.CodeTestImpl;
-import com.diffblue.interview.analyzer.CoverageProcessor;
-import com.diffblue.interview.analyzer.CoverageProcessorStub;
+import com.diffblue.interview.analyzer.CoveringProcessor;
 import com.diffblue.interview.runner.TestRunner;
 import com.diffblue.interview.runner.TestRunnerStub;
 import com.diffblue.interview.scanner.TestScanner;
@@ -20,14 +19,14 @@ import java.util.Set;
 public class CodeAnalyzerRunner {
 
     private TestScanner testScanner;
-    private CoverageProcessor coverageProcessor;
+    private CoveringProcessor coveringProcessor;
     private final String javaSrcPath1;
     private final String javaTestPath1;
     private final String javaSrcPath2;
     private final String javaTestPath2;
 
-    public CodeAnalyzerRunner(CoverageProcessor coverageProcessor, TestScanner testScanner) {
-        this.coverageProcessor = coverageProcessor;
+    public CodeAnalyzerRunner(CoveringProcessor coveringProcessor, TestScanner testScanner) {
+        this.coveringProcessor = coveringProcessor;
         this.testScanner = testScanner;
 
         String currentDir = new File("").getAbsoluteFile().getAbsolutePath();
@@ -106,6 +105,6 @@ public class CodeAnalyzerRunner {
 
     private CodeTest prepareCodeTest(String srcFile, String testFile) {
         CodeClass srcCodeClass = new CodeClassImpl(srcFile);
-        return new CodeTestImpl(testFile, srcCodeClass, coverageProcessor);
+        return new CodeTestImpl(testFile, srcCodeClass, coveringProcessor);
     }
 }
