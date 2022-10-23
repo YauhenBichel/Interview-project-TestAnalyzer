@@ -1,8 +1,11 @@
 package com.diffblue.interview.analyzer;
 
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CodeTestImpl implements CodeTest {
 
@@ -23,11 +26,10 @@ public class CodeTestImpl implements CodeTest {
     public Set<CodeLine> getCoveredLines() {
 
         List<CodeLine> lines = codeClass.getLinesOfCode();
-        Set<CodeLine> coveredLines = new HashSet<>();
 
-        for(CodeLine codeLine: lines) {
-            coveredLines.add(codeLine);
-        }
+        Set<CodeLine> coveredLines = lines.stream()
+                .sorted(Comparator.comparingInt(CodeLine::getLineNumber))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
         return coveredLines;
     }

@@ -29,6 +29,8 @@ public class CodeAnalyzerImpl implements CodeAnalyzer {
             codeTestSet.addAll(test.getCoveredLines());
         }
 
+        //TODO: only produces unique CodeLine elements
+
         return codeTestSet;
     }
 
