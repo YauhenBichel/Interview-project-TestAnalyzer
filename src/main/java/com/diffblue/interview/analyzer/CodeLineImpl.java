@@ -19,4 +19,22 @@ public class CodeLineImpl implements CodeLine {
     public String getContents() {
         return content;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CodeLineImpl)) return false;
+
+        CodeLineImpl codeLine = (CodeLineImpl) o;
+
+        if (lineNumber != codeLine.lineNumber) return false;
+        return content != null ? content.equals(codeLine.content) : codeLine.content == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = lineNumber;
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        return result;
+    }
 }

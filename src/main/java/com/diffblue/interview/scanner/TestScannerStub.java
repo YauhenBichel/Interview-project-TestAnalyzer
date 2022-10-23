@@ -3,11 +3,17 @@ package com.diffblue.interview.scanner;
 import com.diffblue.interview.Constants;
 import com.diffblue.interview.model.Pair;
 
-import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
 public class TestScannerStub implements TestScanner {
+
+    private FileHelper fileHelper;
+
+    public TestScannerStub(FileHelper fileHelper) {
+        this.fileHelper = fileHelper;
+    }
+
     @Override
     public Set<String> getSourceFiles() {
         return null;
@@ -20,7 +26,7 @@ public class TestScannerStub implements TestScanner {
 
     @Override
     public Set<Pair<String, String>> getSourceTestPairs() {
-        String currentDir = new File("").getAbsoluteFile().getAbsolutePath();
+        String currentDir = fileHelper.getAbsolutePath();
         final String javaSrcPath1 = currentDir + Constants.javaSrcFile1;
         final String javaTestPath1 = currentDir + Constants.javaTestFile1;
         final String javaSrcPath2 = currentDir + Constants.javaSrcFile2;
