@@ -35,3 +35,13 @@ that cover something not covered by other tests.
 Question 4 
 ------
 If you have not done so already, write jUnit tests for the code that you have written.
+
+---
+
+## Contributors
+
+Thank you to everyone who has helped this project. Your code, reviews, issues, and pull requests are appreciated.
+
+- [@YauhenBichel](https://github.com/YauhenBichel)
+
+See the [full contributor graph](https://github.com/YauhenBichel/Interview-project-TestAnalyzer/graphs/contributors).
